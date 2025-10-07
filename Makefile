@@ -1,4 +1,4 @@
-# Makefile for MSA Paper Figures
+# Makefile for MSA Profiles Analysis
 # Reproducible figure generation for publication
 
 # R command
@@ -39,7 +39,7 @@ clean:
 
 # Help
 help:
-	@echo "MSA Paper Figures - Reproducible Figure Generation"
+	@echo "MSA Profiles Analysis - Reproducible Figure Generation"
 	@echo "================================================="
 	@echo "Main targets:"
 	@echo "  make              - Generate all paper figures"

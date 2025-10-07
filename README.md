@@ -1,4 +1,4 @@
-# MSA Paper Figures - Reproducible Code
+# MSA Profiles Analysis - Reproducible Code
 
 This repository contains the code and data necessary to reproduce all figures from the paper on Mutation-Stability-Activity (MSA) model analysis of neutral protein structure evolution.
 
@@ -50,7 +50,7 @@ Paper figures will be saved in the `figures/` directory:
 ## File Structure
 
 ```
-MSA-paper-figures/
+msa_profiles_shared/
 ├── README.md              # This file
 ├── Makefile               # Build system
 ├── requirements.txt       # R package dependencies
