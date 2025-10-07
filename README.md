@@ -1,0 +1,133 @@
+# MSA Paper Figures - Reproducible Code
+
+This repository contains the code and data necessary to reproduce all figures from the paper on Mutation-Stability-Activity (MSA) model analysis of neutral protein structure evolution.
+
+## Paper Reference
+
+*[Add your paper citation here when published]*
+
+## Overview
+
+The MSA model predicts structural divergence from sequence mutations by accounting for:
+- **Stability selection** (via mutational ΔΔG values)  
+- **Activity selection** (via mutational activation energy changes)
+
+This repository generates **4 publication figures**:
+1. **Figure 1**: Model progression analysis (M0→MM→MS→MSA)
+2. **Figure 2**: SHAP decomposition analysis 
+3. **Figure 3**: SHAP parameter correlations
+4. **Supplementary Figure**: MSA vs M12 correlation analysis
+
+## Quick Start
+
+### Prerequisites
+
+Install required R packages:
+```r
+install.packages(c("tidyverse", "ggplot2", "cowplot", "patchwork", 
+                  "ggExtra", "ggpubr", "here"))
+```
+
+### Generate All Figures
+
+```bash
+# Generate all individual figures
+make individual
+
+# Generate combined paper figures  
+make paper
+
+# Generate everything
+make all
+```
+
+### View Results
+
+Paper figures will be saved in:
+- `figures/individual/` - Individual figure components
+- `figures/combined/` - Final multi-panel paper figures
+
+## File Structure
+
+```
+MSA-paper-figures/
+├── README.md              # This file
+├── Makefile               # Build system
+├── requirements.txt       # R package dependencies
+├── data/                  # Input data files
+│   ├── profiles_msa.csv   # MSA model results
+│   ├── profiles_ec2024.csv # Empirical data
+│   └── dataset_ec2024.csv # Protein metadata
+├── src/                   # Figure generation code
+│   ├── config.R           # Configuration settings
+│   ├── data_prep.R        # Data preparation
+│   ├── fig_*.R            # Individual figure scripts
+│   └── combine_paper_figures.R # Multi-panel assembly
+└── figures/               # Output directory
+    ├── individual/        # Individual figure PDFs
+    └── combined/          # Paper figure PDFs
+```
+
+## Detailed Usage
+
+### Generate Specific Figures
+
+```bash
+# Individual figures
+make fig_model_profiles
+make fig_shap_profiles
+make fig_msa_vs_m12_correlation
+
+# Paper figures
+make paper_fig1    # Model progression
+make paper_fig2    # SHAP decomposition  
+make paper_fig3    # SHAP correlations
+make paper_suppl   # MSA vs M12 correlation
+```
+
+### Customization
+
+Edit `src/config.R` to modify:
+- Color schemes
+- Figure dimensions
+- Text sizes
+- Example proteins
+
+### Data Description
+
+- **profiles_msa.csv**: MSA model predictions and SHAP decompositions for 34 proteins
+- **profiles_ec2024.csv**: Empirical structural divergence data from Echave & Carpentier (2024)
+- **dataset_ec2024.csv**: Protein metadata including PDB chains and active sites
+
+## System Requirements
+
+- R (≥ 4.0)
+- Required packages (see requirements.txt)
+- ~50MB disk space for figures
+
+## Makefile Targets
+
+| Target | Description |
+|--------|-------------|
+| `make` or `make individual` | Generate all individual figures |
+| `make paper` | Generate combined paper figures |
+| `make all` | Generate everything |
+| `make clean` | Remove all generated figures |
+| `make fig_NAME` | Generate specific figure |
+| `make help` | Show all available targets |
+
+## Citation
+
+If you use this code, please cite:
+
+```
+[Add paper citation here]
+```
+
+## Contact
+
+[Add contact information]
+
+## License
+
+[Add license information]

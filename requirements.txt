@@ -1,0 +1,12 @@
+# R Package Dependencies for MSA Paper Figures
+# 
+# Install with:
+# install.packages(c("tidyverse", "ggplot2", "cowplot", "patchwork", "ggExtra", "ggpubr", "here"))
+
+tidyverse     # Data manipulation and visualization
+ggplot2       # Grammar of graphics plotting  
+cowplot       # Publication-ready plots
+patchwork     # Multi-panel figure composition
+ggExtra       # Marginal plots and extensions
+ggpubr        # Statistical annotations
+here          # Project-relative file paths

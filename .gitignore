@@ -1,0 +1,16 @@
+# R files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# Output files (optional - could be included for reviewers)
+# figures/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+Rplots.pdf
