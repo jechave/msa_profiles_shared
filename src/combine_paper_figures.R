@@ -11,10 +11,30 @@ library(here)
 source(here("src", "config.R"))
 
 
-# Paper Figure 1: Model Progression Analysis
-# Combines model profiles with summary statistics and correlations
+# Paper Figure 1: MSA vs M12 Correlation
+# Two-panel correlation analysis between MSA and M12 models
 create_paper_fig1 <- function() {
-  message("Creating Paper Figure 1: Model Progression Analysis")
+  message("Creating Paper Figure 1: MSA vs M12 Correlation")
+  
+  # Source the individual figure script
+  source(here("src", "fig_msa_vs_m12_correlation.R"))
+  
+  # Load data
+  source(here("src", "data_prep.R"))
+  
+  # Generate the figure (already combined two-panel layout)
+  combined <- plot_msa_vs_m12_correlation(profiles)
+  
+  # Save using config dimensions
+  output_file <- file.path(FIG_DIR_COMBINED, "paper_fig1_msa_vs_m12.pdf")
+  ggsave(output_file, combined, width = FIG_WIDTH_MULTI, height = FIG_HEIGHT, dpi = 300)
+  message("Saved: ", output_file)
+}
+
+# Paper Figure 2: Model Progression Analysis
+# Combines model profiles with summary statistics and correlations
+create_paper_fig2 <- function() {
+  message("Creating Paper Figure 2: Model Progression Analysis")
   
   # Source the individual figure scripts to get the plot objects
   source(here("src", "fig_model_profiles.R"))
@@ -36,15 +56,15 @@ create_paper_fig1 <- function() {
   combined <- combined + plot_layout(widths = c(1.5, 1))
   
   # Save using config dimensions
-  output_file <- file.path(FIG_DIR_COMBINED, "paper_fig1_model_progression.pdf")
+  output_file <- file.path(FIG_DIR_COMBINED, "paper_fig2_model_progression.pdf")
   ggsave(output_file, combined, width = FIG_WIDTH_PAPER, height = FIG_HEIGHT_PAPER_TALL, dpi = 300)
   message("Saved: ", output_file)
 }
 
-# Paper Figure 2: SHAP Decomposition Analysis
+# Paper Figure 3: SHAP Decomposition Analysis
 # Combines SHAP profiles with distributions
-create_paper_fig2 <- function() {
-  message("Creating Paper Figure 2: SHAP Decomposition Analysis")
+create_paper_fig3 <- function() {
+  message("Creating Paper Figure 3: SHAP Decomposition Analysis")
   
   # Source the individual figure scripts
   source(here("src", "fig_shap_profiles.R"))
@@ -67,15 +87,15 @@ create_paper_fig2 <- function() {
   combined <- combined + plot_layout(widths = c(1.5, 1))
   
   # Save using config dimensions
-  output_file <- file.path(FIG_DIR_COMBINED, "paper_fig2_shap_decomposition.pdf")
+  output_file <- file.path(FIG_DIR_COMBINED, "paper_fig3_shap_decomposition.pdf")
   ggsave(output_file, combined, width = FIG_WIDTH_PAPER, height = FIG_HEIGHT_PAPER_TALL, dpi = 300)
   message("Saved: ", output_file)
 }
 
-# Paper Figure 3: SHAP Parameter Correlations
+# Paper Figure 4: SHAP Parameter Correlations
 # Shows correlations between SHAP components and biophysical parameters
-create_paper_fig3 <- function() {
-  message("Creating Paper Figure 3: SHAP Parameter Correlations")
+create_paper_fig4 <- function() {
+  message("Creating Paper Figure 4: SHAP Parameter Correlations")
   
   # Source the individual figure scripts
   source(here("src", "fig_shap_mut_vs_lrmsf.R"))
@@ -95,28 +115,8 @@ create_paper_fig3 <- function() {
   combined <- combined + plot_annotation(tag_levels = 'A')
   
   # Save using config dimensions
-  output_file <- file.path(FIG_DIR_COMBINED, "paper_fig3_shap_correlations.pdf")
+  output_file <- file.path(FIG_DIR_COMBINED, "paper_fig4_shap_correlations.pdf")
   ggsave(output_file, combined, width = FIG_WIDTH_PAPER, height = FIG_HEIGHT_PAPER_SHORT, dpi = 300)
-  message("Saved: ", output_file)
-}
-
-# Paper Supplementary Figure: MSA vs M12 Correlation
-# Two-panel correlation analysis between MSA and M12 models
-create_paper_suppl_fig_msa_vs_m12 <- function() {
-  message("Creating Paper Supplementary Figure: MSA vs M12 Correlation")
-  
-  # Source the individual figure script
-  source(here("src", "fig_msa_vs_m12_correlation.R"))
-  
-  # Load data
-  source(here("src", "data_prep.R"))
-  
-  # Generate the figure (already combined two-panel layout)
-  combined <- plot_msa_vs_m12_correlation(profiles)
-  
-  # Save using config dimensions
-  output_file <- file.path(FIG_DIR_COMBINED, "paper_suppl_fig_msa_vs_m12.pdf")
-  ggsave(output_file, combined, width = FIG_WIDTH_MULTI, height = FIG_HEIGHT, dpi = 300)
   message("Saved: ", output_file)
 }
 
@@ -130,6 +130,6 @@ if (!dir.exists(FIG_DIR_COMBINED)) {
 create_paper_fig1()
 create_paper_fig2()
 create_paper_fig3()
-create_paper_suppl_fig_msa_vs_m12()
+create_paper_fig4()
 
 message("\nAll paper figures have been generated successfully!")

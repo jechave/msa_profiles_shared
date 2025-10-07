@@ -13,10 +13,10 @@ The MSA model predicts structural divergence from sequence mutations by accounti
 - **Activity selection** (via mutational activation energy changes)
 
 This repository generates **4 publication figures**:
-1. **Figure 1**: Model progression analysis (M0→MM→MS→MSA)
-2. **Figure 2**: SHAP decomposition analysis 
-3. **Figure 3**: SHAP parameter correlations
-4. **Supplementary Figure**: MSA vs M12 correlation analysis
+1. **Figure 1**: MSA vs M12 correlation analysis
+2. **Figure 2**: Model progression analysis (M0→MM→MS→MSA)
+3. **Figure 3**: SHAP decomposition analysis 
+4. **Figure 4**: SHAP parameter correlations
 
 ## Quick Start
 
@@ -79,10 +79,10 @@ make fig_shap_profiles
 make fig_msa_vs_m12_correlation
 
 # Paper figures
-make paper_fig1    # Model progression
-make paper_fig2    # SHAP decomposition  
-make paper_fig3    # SHAP correlations
-make paper_suppl   # MSA vs M12 correlation
+make paper_fig1    # MSA vs M12 correlation
+make paper_fig2    # Model progression
+make paper_fig3    # SHAP decomposition  
+make paper_fig4    # SHAP correlations
 ```
 
 ### Customization

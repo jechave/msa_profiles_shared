@@ -16,8 +16,8 @@ INDIVIDUAL_FIGS = model_profiles model_d2 model_delta_d2 \
                   msa_vs_m12_correlation
 
 # Paper figure targets
-PAPER_FIGS = paper_fig1_model_progression paper_fig2_shap_decomposition \
-             paper_fig3_shap_correlations paper_suppl_fig_msa_vs_m12
+PAPER_FIGS = paper_fig1_msa_vs_m12 paper_fig2_model_progression \
+             paper_fig3_shap_decomposition paper_fig4_shap_correlations
 
 # Default target
 all: individual paper
@@ -38,10 +38,10 @@ $(FIG_DIR)/%.pdf: $(SRC_DIR)/fig_%.R $(SRC_DIR)/config.R $(SRC_DIR)/data_prep.R 
 	@echo "✓ $@ complete"
 
 # Generate specific paper figures
-paper_fig1: $(COMBINED_DIR)/paper_fig1_model_progression.pdf
-paper_fig2: $(COMBINED_DIR)/paper_fig2_shap_decomposition.pdf  
-paper_fig3: $(COMBINED_DIR)/paper_fig3_shap_correlations.pdf
-paper_suppl: $(COMBINED_DIR)/paper_suppl_fig_msa_vs_m12.pdf
+paper_fig1: $(COMBINED_DIR)/paper_fig1_msa_vs_m12.pdf
+paper_fig2: $(COMBINED_DIR)/paper_fig2_model_progression.pdf  
+paper_fig3: $(COMBINED_DIR)/paper_fig3_shap_decomposition.pdf
+paper_fig4: $(COMBINED_DIR)/paper_fig4_shap_correlations.pdf
 
 $(COMBINED_DIR)/%.pdf: individual
 	@echo "Generating $@..."
@@ -77,10 +77,10 @@ help:
 	@echo "  make paper        - Generate paper figure combinations"
 	@echo ""
 	@echo "Specific paper figures:"
-	@echo "  make paper_fig1   - Model progression analysis"
-	@echo "  make paper_fig2   - SHAP decomposition analysis" 
-	@echo "  make paper_fig3   - SHAP parameter correlations"
-	@echo "  make paper_suppl  - MSA vs M12 correlation"
+	@echo "  make paper_fig1   - MSA vs M12 correlation"
+	@echo "  make paper_fig2   - Model progression analysis" 
+	@echo "  make paper_fig3   - SHAP decomposition analysis"
+	@echo "  make paper_fig4   - SHAP parameter correlations"
 	@echo ""
 	@echo "Specific individual figures:"
 	@echo "  make fig_NAME     - Generate specific figure (e.g., make fig_model_profiles)"
@@ -93,4 +93,4 @@ help:
 	@echo "  make clean-individual - Remove individual figures only"
 	@echo "  make clean-combined   - Remove combined figures only"
 
-.PHONY: all individual paper paper_fig1 paper_fig2 paper_fig3 paper_suppl clean clean-individual clean-combined help
+.PHONY: all individual paper paper_fig1 paper_fig2 paper_fig3 paper_fig4 clean clean-individual clean-combined help
