@@ -107,8 +107,8 @@ if (!interactive()) {
   fig <- plot_msa_vs_m12_correlation(profiles)
   
   # Save the figure
-  output_file <- file.path(FIG_DIR_INDIVIDUAL, "msa_vs_m12_correlation.pdf")
+  output_file <- file.path(FIG_DIR, "msa_vs_m12_correlation.pdf")
   ggsave(output_file, fig, width = FIG_WIDTH_MULTI, height = FIG_HEIGHT, dpi = 300)
   
-  message("Figure saved to: ", output_file)
+  # message("Figure saved to: ", output_file)
 }

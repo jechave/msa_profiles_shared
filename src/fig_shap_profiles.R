@@ -120,8 +120,8 @@ if (!interactive()) {
   fig <- plot_shap_profiles(profiles, shap_results, EXAMPLE_PROTEINS)
   
   # Save the figure
-  output_file <- file.path(FIG_DIR_INDIVIDUAL, "shap_profiles.pdf")
+  output_file <- file.path(FIG_DIR, "shap_profiles.pdf")
   ggsave(output_file, fig, width = FIG_WIDTH, height = FIG_HEIGHT_MULTI, dpi = 300)
   
-  message("Figure saved to: ", output_file)
+  # message("Figure saved to: ", output_file)
 }

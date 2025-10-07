@@ -52,10 +52,8 @@ ALPHA_OBSERVED_DATA <- 0.5         # Observed data lines
 ALPHA_LEGEND_OBSERVED <- 0.5       # Legend transparency for observed
 ALPHA_LEGEND_OPAQUE <- 1.0         # Legend transparency for models
 
-# Output directories
-FIG_DIR_INDIVIDUAL <- here::here("figures", "individual")
-FIG_DIR_COMBINED <- here::here("figures", "combined")
+# Output directory
+FIG_DIR <- here::here("figures")
 
-# Ensure output directories exist
-if (!dir.exists(FIG_DIR_INDIVIDUAL)) dir.create(FIG_DIR_INDIVIDUAL, recursive = TRUE)
-if (!dir.exists(FIG_DIR_COMBINED)) dir.create(FIG_DIR_COMBINED, recursive = TRUE)
+# Ensure output directory exists
+if (!dir.exists(FIG_DIR)) dir.create(FIG_DIR, recursive = TRUE)

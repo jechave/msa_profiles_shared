@@ -28,24 +28,24 @@ install.packages(c("tidyverse", "ggplot2", "cowplot", "patchwork",
                   "ggExtra", "ggpubr", "here"))
 ```
 
-### Generate All Figures
+### Generate Figures
 
 ```bash
-# Generate all individual figures
-make individual
+# Generate all paper figures
+make
 
-# Generate combined paper figures  
-make paper
-
-# Generate everything
+# Or equivalently
 make all
+make paper
 ```
 
 ### View Results
 
-Paper figures will be saved in:
-- `figures/individual/` - Individual figure components
-- `figures/combined/` - Final multi-panel paper figures
+Paper figures will be saved in the `figures/` directory:
+- `figures/paper_fig1_msa_vs_m12.pdf`
+- `figures/paper_fig2_model_progression.pdf`
+- `figures/paper_fig3_shap_decomposition.pdf`
+- `figures/paper_fig4_shap_correlations.pdf`
 
 ## File Structure
 
@@ -61,11 +61,9 @@ MSA-paper-figures/
 ├── src/                   # Figure generation code
 │   ├── config.R           # Configuration settings
 │   ├── data_prep.R        # Data preparation
-│   ├── fig_*.R            # Individual figure scripts
-│   └── combine_paper_figures.R # Multi-panel assembly
-└── figures/               # Output directory
-    ├── individual/        # Individual figure PDFs
-    └── combined/          # Paper figure PDFs
+│   ├── fig_*.R            # Individual figure components
+│   └── combine_paper_figures.R # Main figure generation
+└── figures/               # Generated paper figures (PDF)
 ```
 
 ## Detailed Usage
@@ -73,12 +71,6 @@ MSA-paper-figures/
 ### Generate Specific Figures
 
 ```bash
-# Individual figures
-make fig_model_profiles
-make fig_shap_profiles
-make fig_msa_vs_m12_correlation
-
-# Paper figures
 make paper_fig1    # MSA vs M12 correlation
 make paper_fig2    # Model progression
 make paper_fig3    # SHAP decomposition  
@@ -103,17 +95,17 @@ Edit `src/config.R` to modify:
 
 - R (≥ 4.0)
 - Required packages (see requirements.txt)
-- ~50MB disk space for figures
+- ~50MB disk space
 
 ## Makefile Targets
 
 | Target | Description |
 |--------|-------------|
-| `make` or `make individual` | Generate all individual figures |
-| `make paper` | Generate combined paper figures |
-| `make all` | Generate everything |
+| `make` | Generate all paper figures |
+| `make all` | Generate all paper figures |
+| `make paper` | Generate all paper figures |
+| `make paper_figN` | Generate specific figure N |
 | `make clean` | Remove all generated figures |
-| `make fig_NAME` | Generate specific figure |
 | `make help` | Show all available targets |
 
 ## Citation

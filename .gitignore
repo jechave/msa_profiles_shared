@@ -14,3 +14,8 @@ Thumbs.db
 
 # Temporary files
 Rplots.pdf
+
+# Individual figure components (users only need paper_fig*.pdf)
+figures/model_*.pdf
+figures/shap_*.pdf 
+figures/msa_vs_m12_correlation.pdf

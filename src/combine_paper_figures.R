@@ -26,7 +26,7 @@ create_paper_fig1 <- function() {
   combined <- plot_msa_vs_m12_correlation(profiles)
   
   # Save using config dimensions
-  output_file <- file.path(FIG_DIR_COMBINED, "paper_fig1_msa_vs_m12.pdf")
+  output_file <- file.path(FIG_DIR, "paper_fig1_msa_vs_m12.pdf")
   ggsave(output_file, combined, width = FIG_WIDTH_MULTI, height = FIG_HEIGHT, dpi = 300)
   message("Saved: ", output_file)
 }
@@ -56,7 +56,7 @@ create_paper_fig2 <- function() {
   combined <- combined + plot_layout(widths = c(1.5, 1))
   
   # Save using config dimensions
-  output_file <- file.path(FIG_DIR_COMBINED, "paper_fig2_model_progression.pdf")
+  output_file <- file.path(FIG_DIR, "paper_fig2_model_progression.pdf")
   ggsave(output_file, combined, width = FIG_WIDTH_PAPER, height = FIG_HEIGHT_PAPER_TALL, dpi = 300)
   message("Saved: ", output_file)
 }
@@ -87,7 +87,7 @@ create_paper_fig3 <- function() {
   combined <- combined + plot_layout(widths = c(1.5, 1))
   
   # Save using config dimensions
-  output_file <- file.path(FIG_DIR_COMBINED, "paper_fig3_shap_decomposition.pdf")
+  output_file <- file.path(FIG_DIR, "paper_fig3_shap_decomposition.pdf")
   ggsave(output_file, combined, width = FIG_WIDTH_PAPER, height = FIG_HEIGHT_PAPER_TALL, dpi = 300)
   message("Saved: ", output_file)
 }
@@ -115,15 +115,15 @@ create_paper_fig4 <- function() {
   combined <- combined + plot_annotation(tag_levels = 'A')
   
   # Save using config dimensions
-  output_file <- file.path(FIG_DIR_COMBINED, "paper_fig4_shap_correlations.pdf")
+  output_file <- file.path(FIG_DIR, "paper_fig4_shap_correlations.pdf")
   ggsave(output_file, combined, width = FIG_WIDTH_PAPER, height = FIG_HEIGHT_PAPER_SHORT, dpi = 300)
   message("Saved: ", output_file)
 }
 
 # Main execution
 # Create output directory if it doesn't exist
-if (!dir.exists(FIG_DIR_COMBINED)) {
-  dir.create(FIG_DIR_COMBINED, recursive = TRUE)
+if (!dir.exists(FIG_DIR)) {
+  dir.create(FIG_DIR, recursive = TRUE)
 }
 
 # Generate paper figures

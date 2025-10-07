@@ -153,8 +153,8 @@ if (!interactive()) {
   fig <- plot_model_profiles(profiles, EXAMPLE_PROTEINS, model_deviance)
   
   # Save the figure
-  output_file <- file.path(FIG_DIR_INDIVIDUAL, "model_profiles.pdf")
+  output_file <- file.path(FIG_DIR, "model_profiles.pdf")
   ggsave(output_file, fig, width = FIG_WIDTH, height = FIG_HEIGHT_MULTI, dpi = 300)
   
-  message("Figure saved to: ", output_file)
+  # message("Figure saved to: ", output_file)
 }

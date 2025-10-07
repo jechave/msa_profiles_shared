@@ -60,8 +60,8 @@ if (!interactive()) {
   fig <- plot_shap_mut_vs_lrmsf(profiles)
   
   # Save the figure
-  output_file <- file.path(FIG_DIR_INDIVIDUAL, "shap_mut_vs_lrmsf.pdf")
+  output_file <- file.path(FIG_DIR, "shap_mut_vs_lrmsf.pdf")
   ggsave(output_file, fig, width = FIG_WIDTH, height = FIG_HEIGHT, dpi = 300)
   
-  message("Figure saved to: ", output_file)
+  # message("Figure saved to: ", output_file)
 }

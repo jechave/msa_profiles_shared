@@ -93,8 +93,8 @@ if (!interactive()) {
   fig <- plot_shap_relative_sd(profiles)
   
   # Save the figure
-  output_file <- file.path(FIG_DIR_INDIVIDUAL, "shap_relative_sd.pdf")
+  output_file <- file.path(FIG_DIR, "shap_relative_sd.pdf")
   ggsave(output_file, fig, width = FIG_WIDTH, height = FIG_HEIGHT, dpi = 300)
   
-  message("Figure saved to: ", output_file)
+  # message("Figure saved to: ", output_file)
 }
