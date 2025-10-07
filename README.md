@@ -4,7 +4,7 @@ This repository contains the code and data necessary to reproduce all figures fr
 
 ## Paper Reference
 
-*[Add your paper citation here when published]*
+Echave, J., and Carpentier, M. (2025). Three biophysical constraints determine the variation of structural divergence among residues in enzyme evolution. *[Journal name to be updated upon publication]*
 
 ## Overview
 
@@ -113,12 +113,14 @@ Edit `src/config.R` to modify:
 If you use this code, please cite:
 
 ```
-[Add paper citation here]
+Echave, J., and Carpentier, M. (2025). Three biophysical constraints determine 
+the variation of structural divergence among residues in enzyme evolution.
+[Journal name to be updated upon publication]
 ```
 
 ## Contact
 
-[Add contact information]
+Julian Echave - [Add email if desired]
 
 ## License
 
