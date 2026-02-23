@@ -1,0 +1,142 @@
+---
+title: "Three biophysical constraints determine the variation of structural divergence among residues in enzyme evolution --- Supplement"
+author: "Julian Echave & Mathilde Carpentier"
+header-includes:
+  - \usepackage{float}
+  - \usepackage{caption}
+  - \usepackage{longtable}
+  - \usepackage{booktabs}
+  - \renewcommand{\thetable}{S\arabic{table}}
+geometry: "a4paper, margin=1in"
+output:
+  pdf_document:
+    extra_dependencies: ["longtable", "booktabs"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(here)
+
+# Load configuration
+source(here("src", "config.R"))
+
+# Load dataset table (shared with enzyme_evo_str_analysis)
+dataset_table <- read_csv(here("data", "final_dataset_table.csv"),
+                          col_types = cols(mcsa_id = col_character()))
+
+# Load MSA profiles and prepare data
+source(here("src", "shared_data_preparation.R"))
+source(here("src", "data_prep.R"))
+
+# Compute per-family SHAP component SDs from profiles
+shap_sd <- profiles %>%
+  group_by(mcsa_id) %>%
+  summarise(
+    sd_phi_mut = sd(phi_mut, na.rm = TRUE),
+    sd_phi_stab = sd(phi_stab, na.rm = TRUE),
+    sd_phi_act = sd(phi_act, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Compute per-family Pearson R between lrmsd_obs and lrmsd_msa
+pearson_r <- profiles %>%
+  group_by(mcsa_id) %>%
+  summarise(
+    R = cor(lrmsd_obs, lrmsd_msa, use = "complete.obs"),
+    .groups = "drop"
+  )
+
+# Build Table S3 data: join model_deviance with shap_sd and pearson_r
+table_s3 <- model_deviance %>%
+  select(mcsa_id, a1, a2, dev_expl_msa) %>%
+  mutate(mcsa_id = as.character(mcsa_id)) %>%
+  left_join(pearson_r %>% mutate(mcsa_id = as.character(mcsa_id)), by = "mcsa_id") %>%
+  left_join(shap_sd %>% mutate(mcsa_id = as.character(mcsa_id)), by = "mcsa_id") %>%
+  left_join(dataset_table %>% select(mcsa_id, pdb_chain_id), by = "mcsa_id")
+```
+
+```{r table-s1}
+dataset_table %>%
+  mutate(across(where(is.double), ~ round(., 2))) %>%
+  mutate(seqid_mean = round(seqid_mean * 100, 0)) %>%
+  select(mcsa_id, pdb_chain_id, name, source, family) %>%
+  kable(
+    col.names = c("M-CSA", "PDB", "Name", "Source", "Family"),
+    caption = "Dataset entries and reference protein",
+    format = "latex",
+    booktabs = TRUE,
+    linesep = ""
+  ) %>%
+  kable_styling(
+    font_size = 8,
+    latex_options = c("scale_down", "hold_position")
+  ) %>%
+  column_spec(3:5, width = "4cm")
+```
+
+\clearpage
+
+```{r table-s2}
+dataset_table %>%
+  mutate(across(where(is.double), ~ round(., 2))) %>%
+  mutate(seqid_mean = round(seqid_mean * 100, 0)) %>%
+  select(mcsa_id, nprot, seqid_mean, rmsd_mean, nresidues, nresidues_asite, rmsd_asite, cath_class, ec_class) %>%
+  kable(
+    col.names = c("M-CSA", "N", "<Id%>", "<RMSD>", "Length", "AS size", "AS RMSD", "CATH", "EC"),
+    caption = "Dataset properties",
+    format = "latex",
+    booktabs = TRUE
+  ) %>%
+  kable_styling(
+    font_size = 8,
+    latex_options = "scale_down"
+  ) %>%
+  footnote(
+    general = "N: number of family members; <Id%>: average family seq. identity; <RMSD>: average family RMSD; Length: number of residues of reference protein; AS size: number of residues of active site; CATH: CATH class; EC: EC class",
+    general_title = "",
+    threeparttable = TRUE
+  )
+```
+
+\clearpage
+
+```{r table-s3}
+table_s3 %>%
+  arrange(as.numeric(mcsa_id)) %>%
+  mutate(
+    pdb_chain_id = gsub("_", "\\\\_", pdb_chain_id),
+    aS = sprintf("%.2f", a1),
+    aA = sprintf("%.2f", a2),
+    D2 = sprintf("%.2f", dev_expl_msa),
+    R = sprintf("%.2f", R),
+    sd_mut = sprintf("%.2f", sd_phi_mut),
+    sd_stab = sprintf("%.2f", sd_phi_stab),
+    sd_act = sprintf("%.2f", sd_phi_act)
+  ) %>%
+  select(mcsa_id, pdb_chain_id, aS, aA, D2, R, sd_mut, sd_stab, sd_act) %>%
+  kable(
+    col.names = c("M-CSA", "PDB", "$a_S$", "$a_A$",
+                   "$D^2$", "$R$",
+                   "$\\text{sd}(\\phi_{\\text{mut}})$",
+                   "$\\text{sd}(\\phi_{\\text{stab}})$",
+                   "$\\text{sd}(\\phi_{\\text{act}})$"),
+    caption = "MSA model parameters and SHAP decomposition",
+    format = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    linesep = ""
+  ) %>%
+  kable_styling(
+    font_size = 8,
+    latex_options = c("scale_down", "hold_position")
+  ) %>%
+  footnote(
+    general = "$a_S$: stability selection parameter; $a_A$: activity selection parameter; $D^2$: deviance explained by MSA model; $R$: Pearson correlation between observed and MSA-predicted lRMSD; $\\\\text{sd}(\\\\phi_{\\\\text{mut}})$, $\\\\text{sd}(\\\\phi_{\\\\text{stab}})$, $\\\\text{sd}(\\\\phi_{\\\\text{act}})$: standard deviations of mutation, stability, and activity SHAP components across residues",
+    general_title = "",
+    threeparttable = TRUE,
+    escape = FALSE
+  )
+```
