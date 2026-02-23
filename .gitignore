@@ -14,6 +14,7 @@ Thumbs.db
 
 # Temporary files
 Rplots.pdf
+texput.log
 
 # Individual figure components (users only need paper_fig*.pdf)
 figures/model_*.pdf
