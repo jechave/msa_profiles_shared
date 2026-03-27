@@ -8,6 +8,10 @@
 # Output files (optional - could be included for reviewers)
 # figures/
 
+# Claude Code
+CLAUDE.md
+.claude/
+
 # System files
 .DS_Store
 Thumbs.db
